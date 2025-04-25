@@ -46,3 +46,11 @@ figma-clone> npx create-liveblocks-app@latest --init --framework react
 \figma-clone> npm run dev
 
 figma-clone> npx shadcn@latest init
+
+echo "# Figma-Clone" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/SudheeshTD/Figma-Clone.git
+git push -u origin main
