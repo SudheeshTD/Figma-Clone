@@ -57,7 +57,7 @@ const Live = () => {
         value: cursorState.reaction,
       });
     }
-  }, 100);
+  }, 120);
 
   useEventListener((eventData) => {
     const event = eventData.event as ReactionEvent;
