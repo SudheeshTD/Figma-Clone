@@ -54,3 +54,5 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/SudheeshTD/Figma-Clone.git
 git push -u origin main
+
+npx shadcn@latest add button

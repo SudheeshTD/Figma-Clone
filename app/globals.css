@@ -10,6 +10,60 @@
   font-family: work sans, sans-serif;
 }
 
+/* global.css */
+@import "tailwindcss";
+
+@theme {
+  /* Color Definitions */
+  --color-primary-black: #14181f;
+  --color-primary-green: #56ffa6;
+  --color-primary-grey-100: #2b303b;
+  --color-primary-grey-200: #202731;
+  --color-primary-grey-300: #c4d3ed;
+
+  /* Container Settings */
+  --container-padding: 2rem;
+  --container-max-width: 1400px;
+
+  /* Breakpoints */
+  --breakpoint-2xl: 1400px;
+
+  /* Keyframes */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+/* Container Styles */
+.container {
+  @apply mx-auto px-[var(--container-padding)] max-w-[var(--container-max-width)];
+}
+
+/* Dark mode theming */
+@dark {
+  :root {
+    /* Define dark mode variables if needed */
+  }
+}
+
 @layer utilities {
   .no-ring {
     outline: none;
