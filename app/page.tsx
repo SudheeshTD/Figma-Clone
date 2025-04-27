@@ -162,7 +162,7 @@
 import { fabric } from "fabric";
 import { useEffect, useRef, useState } from "react";
 
-import { useMutation, useRedo, useStorage, useUndo } from "@liveblocks/react";
+import { useMutation, useRedo, useUndo } from "@liveblocks/react/suspense";
 import {
   handleCanvaseMouseMove,
   handleCanvasMouseDown,
@@ -185,6 +185,8 @@ import LeftSidebar from "@/components/LeftSidebar";
 import Live from "@/components/Live";
 import RightSidebar from "@/components/RightSidebar";
 import Navbar from "@/components/Navbar";
+import { ClientSideSuspense, useStorage } from "@liveblocks/react/suspense";
+import Loader from "@/components/Loader";
 
 export default function Page() {
   const undo = useUndo();
@@ -221,6 +223,8 @@ export default function Page() {
     fill: "#aabbcc",
     stroke: "#aabbcc",
   });
+  console.log(canvasObjects); // Should show LiveMap {size: 0}
+  console.log(Array.from(canvasObjects)); // Should be []
 
   const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {
     const canvasObjects = storage.get("canvasObjects");
