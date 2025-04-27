@@ -56,3 +56,8 @@ git remote add origin https://github.com/SudheeshTD/Figma-Clone.git
 git push -u origin main
 
 npx shadcn@latest add button
+
+figma-clone> npx shadcn-ui@latest add select label input
+
+
+npm i jspdf
