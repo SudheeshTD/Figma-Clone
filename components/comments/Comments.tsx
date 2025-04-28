@@ -1,6 +1,6 @@
 "use client";
 
-import { ClientSideSuspense } from "@liveblocks/react";
+import { ClientSideSuspense } from "@liveblocks/react/suspense";
 
 import { CommentsOverlay } from "@/components/comments/CommentsOverlay";
 

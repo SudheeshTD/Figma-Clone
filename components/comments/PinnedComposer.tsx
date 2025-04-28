@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Composer, ComposerProps } from "@liveblocks/react-ui";
+import { Composer } from "@liveblocks/react-ui"; // Updated import :contentReference[oaicite:13]{index=13}
 
 type Props = {
-  onComposerSubmit: ComposerProps["onComposerSubmit"];
+  onComposerSubmit: Parameters<typeof Composer>[0]["onComposerSubmit"];
 };
 
 const PinnedComposer = ({ onComposerSubmit, ...props }: Props) => {

@@ -1,24 +1,23 @@
 "use client";
 
 import {
-  FormEvent,
   ReactNode,
-  useCallback,
-  useEffect,
-  useRef,
   useState,
+  useRef,
+  useEffect,
+  useCallback,
+  FormEvent,
 } from "react";
-import { Slot } from "@radix-ui/react-slot";
 import * as Portal from "@radix-ui/react-portal";
-import { ComposerSubmitComment } from "@liveblocks/react-ui/primitives";
+import { useCreateThread } from "@liveblocks/react/suspense"; // createThread hook :contentReference[oaicite:4]{index=4}
+import { ComposerSubmitComment } from "@liveblocks/react-ui/primitives"; // ComposerSubmitComment type :contentReference[oaicite:5]{index=5}
 
-import { useCreateThread } from "@liveblocks/react/suspense";
 import { useMaxZIndex } from "@/lib/useMaxZIndex";
-
 import PinnedComposer from "./PinnedComposer";
 import NewThreadCursor from "./NewThreadCursor";
+import { Slot } from "@radix-ui/react-slot";
 
-type ComposerCoords = null | { x: number; y: number };
+type ComposerCoords = { x: number; y: number } | null;
 
 type Props = {
   children: ReactNode;
@@ -44,7 +43,7 @@ export const NewThread = ({ children }: Props) => {
   const [composerCoords, setComposerCoords] = useState<ComposerCoords>(null);
 
   // set state to track the last pointer event
-  const lastPointerEvent = useRef<PointerEvent>();
+  const lastPointerEvent = useRef<PointerEvent>(null);
 
   // set state to track if user is allowed to use the composer
   const [allowUseComposer, setAllowUseComposer] = useState(false);

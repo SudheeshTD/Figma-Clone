@@ -13,6 +13,14 @@ export function Room({ children }: { children: ReactNode }) {
   return (
     <LiveblocksProvider
       publicApiKey={process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!}
+      resolveUsers={async ({ userIds }) => {
+        return userIds.map((id) => ({
+          name: `User-${id.slice(-4)}`, // e.g. "User-0Ox2"
+          avatar: `https://liveblocks.io/avatars/avatar-${Math.floor(
+            Math.random() * 30
+          )}.png`,
+        }));
+      }}
     >
       <RoomProvider
         id="my-room"

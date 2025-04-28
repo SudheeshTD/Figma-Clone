@@ -2,6 +2,13 @@
 
 import { LiveMap } from "@liveblocks/client";
 
+export type ThreadMetadata = {
+  x: number;
+  y: number;
+  resolved: boolean;
+  zIndex: number;
+};
+
 // https://liveblocks.io/docs/api-reference/liveblocks-react#Typing-your-data
 declare global {
   interface Liveblocks {
@@ -25,6 +32,8 @@ declare global {
         // Example properties, for useSelf, useUser, useOthers, etc.
         // name: string;
         // avatar: string;
+        name: string;
+        avatar: string;
       };
     };
 
@@ -35,12 +44,7 @@ declare global {
     // | { type: "REACTION"; emoji: "🔥" };
 
     // Custom metadata set on threads, for useThreads, useCreateThread, etc.
-    ThreadMetadata: {
-      // Example, attaching coordinates to a thread
-      // x: number;
-      // y: number;
-    };
-
+    ThreadMetadata: ThreadMetadata;
     // Custom room info set with resolveRoomsInfo, for useRoomInfo
     RoomInfo: {
       // Example, rooms with a title and url

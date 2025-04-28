@@ -1,12 +1,19 @@
 "use client";
 
-import { useCallback, useRef } from "react";
-import { ThreadData } from "@liveblocks/client";
+import React, { useCallback, useRef } from "react";
+import { Thread } from "@liveblocks/react-ui"; // Thread UI component :contentReference[oaicite:0]{index=0}
+import {
+  useMarkThreadAsResolved,
+  useThreads,
+} from "@liveblocks/react/suspense"; // Suspense hook for threads :contentReference[oaicite:1]{index=1}
+import { useUser } from "@liveblocks/react/suspense"; // Suspense hook for user info :contentReference[oaicite:2]{index=2}
+import { useEditThreadMetadata } from "@liveblocks/react/suspense"; // Mutation hook for thread metadata :contentReference[oaicite:3]{index=3}
 
-import { ThreadMetadata, useEditThreadMetadata, useThreads, useUser } from "@/liveblocks.config";
 import { useMaxZIndex } from "@/lib/useMaxZIndex";
-
+import { ThreadData } from "@liveblocks/client";
 import { PinnedThread } from "./PinnedThread";
+import { ThreadMetadata } from "@/liveblocks.config";
+// Inline declaration of your custom thread metadata
 
 type OverlayThreadProps = {
   thread: ThreadData<ThreadMetadata>;
@@ -28,9 +35,13 @@ export const CommentsOverlay = () => {
   return (
     <div>
       {threads
-        .filter((thread) => !thread.metadata.resolved)
+        .filter((thread) => !thread.resolved)
         .map((thread) => (
-          <OverlayThread key={thread.id} thread={thread} maxZIndex={maxZIndex} />
+          <OverlayThread
+            key={thread.id}
+            thread={thread}
+            maxZIndex={maxZIndex}
+          />
         ))}
     </div>
   );
@@ -43,7 +54,9 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
    *
    * useEditThreadMetadata: https://liveblocks.io/docs/api-reference/liveblocks-react#useEditThreadMetadata
    */
-  const editThreadMetadata = useEditThreadMetadata();
+
+  const markThreadAsResolved = useMarkThreadAsResolved();
+  // const editThreadMetadata = useEditThreadMetadata();
 
   /**
    * We're using the useUser hook to get the user of the thread.
@@ -55,6 +68,10 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
   // We're using a ref to get the thread element to position it
   const threadRef = useRef<HTMLDivElement>(null);
 
+  const handleResolvedChange = () => {
+    markThreadAsResolved(thread.id);
+  };
+  console.log({ thread });
   // If other thread(s) above, increase z-index on last element updated
   const handleIncreaseZIndex = useCallback(() => {
     if (maxZIndex === thread.metadata.zIndex) {
@@ -62,13 +79,13 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
     }
 
     // Update the z-index of the thread in the room
-    editThreadMetadata({
-      threadId: thread.id,
-      metadata: {
-        zIndex: maxZIndex + 1,
-      },
-    });
-  }, [thread, editThreadMetadata, maxZIndex]);
+    // editThreadMetadata({
+    //   threadId: thread.id,
+    //   metadata: {
+    //     zIndex: maxZIndex + 1,
+    //   },
+    // });
+  }, [thread, maxZIndex]);
 
   if (isLoading) {
     return null;
@@ -84,7 +101,12 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
       }}
     >
       {/* render the thread */}
-      <PinnedThread thread={thread} onFocus={handleIncreaseZIndex} />
+      <PinnedThread
+        key={thread.id}
+        thread={thread}
+        onFocus={handleIncreaseZIndex}
+        onResolvedChange={handleResolvedChange}
+      />
     </div>
   );
 };

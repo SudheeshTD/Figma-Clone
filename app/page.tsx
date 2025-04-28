@@ -64,8 +64,6 @@ export default function Page() {
     fill: "#aabbcc",
     stroke: "#aabbcc",
   });
-  console.log(canvasObjects); // Should show LiveMap {size: 0}
-  console.log(Array.from(canvasObjects)); // Should be []
 
   const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {
     const canvasObjects = storage.get("canvasObjects");
