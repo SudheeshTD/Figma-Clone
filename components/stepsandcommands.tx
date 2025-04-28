@@ -1,0 +1,49 @@
+import LiveCursors from "./cursor/LiveCursors";
+import ReactionSelector from "./reaction/ReactionButton";
+import FlyingReaction from "./reaction/FlyingReaction";
+import Navbar from "./Navbar";
+import LeftSidebar from "./LeftSidebar";
+import RightSidebar from "./RightSidebar";
+import CursorChat from "./cursor/CursorChat";
+import Live from "./Live";
+
+export {
+  LiveCursors,
+  ReactionSelector,
+  FlyingReaction,
+  Navbar,
+  LeftSidebar,
+  RightSidebar,
+  CursorChat,
+  Live,
+};
+
+
+
+figma-clone> npx create-next-app@latest ./
+
+get API from Liveblocks
+
+figma-clone> npm install fabric uuid npm install @liveblocks/client @liveblocks/react
+
+figma-clone> npx create-liveblocks-app@latest --init --framework react
+
+\figma-clone> npm run dev
+
+figma-clone> npx shadcn@latest init
+
+echo "# Figma-Clone" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/SudheeshTD/Figma-Clone.git
+git push -u origin main
+
+npx shadcn@latest add button
+
+figma-clone> npx shadcn-ui@latest add select label input
+
+npm i jspdf
+
+figma-clone> npx shadcn@latest add context-menu
