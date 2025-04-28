@@ -37,6 +37,14 @@ export const initializeFabric = ({
   return canvas;
 };
 
+// Take whatever `toObject()` emits and add our own `objectId`.
+export type SerializedObject = ReturnType<fabric.Object["toObject"]> & {
+  objectId: string;
+};
+
+// Now your Liveblocks entries are:
+export type CanvasShapeEntry = [shapeId: string, shapeData: SerializedObject];
+
 // instantiate creation of custom fabric object/shape and add it to canvas
 export const handleCanvasMouseDown = ({
   options,

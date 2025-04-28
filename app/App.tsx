@@ -26,8 +26,7 @@ import LeftSidebar from "@/components/LeftSidebar";
 import Live from "@/components/Live";
 import RightSidebar from "@/components/RightSidebar";
 import Navbar from "@/components/Navbar";
-import { ClientSideSuspense, useStorage } from "@liveblocks/react/suspense";
-import Loader from "@/components/Loader";
+import { useStorage } from "@liveblocks/react/suspense";
 
 export default function Page() {
   const undo = useUndo();
@@ -75,7 +74,7 @@ export default function Page() {
 
     if (!canvasObjects || canvasObjects.size === 0) return true;
 
-    for (const [key, value] of canvasObjects.entries()) {
+    for (const [key] of canvasObjects.entries()) {
       canvasObjects.delete(key);
     }
 

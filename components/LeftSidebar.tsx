@@ -4,8 +4,13 @@ import { useMemo } from "react";
 import Image from "next/image";
 
 import { getShapeInfo } from "@/lib/utils";
+import { CanvasShapeEntry } from "@/lib/canvas";
 
-const LeftSidebar = ({ allShapes }: { allShapes: Array<any> }) => {
+interface LeftSidebarProps {
+  allShapes: CanvasShapeEntry[];
+}
+
+const LeftSidebar = ({ allShapes }: LeftSidebarProps) => {
   // memoize the result of this function so that it doesn't change on every render but only when there are new shapes
   const memoizedShapes = useMemo(
     () => (
@@ -14,7 +19,7 @@ const LeftSidebar = ({ allShapes }: { allShapes: Array<any> }) => {
           Layers
         </h3>
         <div className="flex flex-col">
-          {allShapes?.map((shape: any) => {
+          {allShapes?.map(([id, shape]) => {
             const info = getShapeInfo(shape[1]?.type);
 
             return (
