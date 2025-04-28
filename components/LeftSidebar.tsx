@@ -19,7 +19,7 @@ const LeftSidebar = ({ allShapes }: LeftSidebarProps) => {
           Layers
         </h3>
         <div className="flex flex-col">
-          {allShapes?.map(([id, shape]) => {
+          {allShapes?.map((shape: any) => {
             const info = getShapeInfo(shape[1]?.type);
 
             return (
