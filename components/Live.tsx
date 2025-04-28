@@ -5,9 +5,8 @@ import {
   useBroadcastEvent,
   useEventListener,
   useMyPresence,
-  useOthers,
 } from "@liveblocks/react";
-import { CursorMode, CursorState, Reaction, ReactionEvent } from "@/types/type";
+import { CursorMode, CursorState, Reaction } from "@/types/type";
 import CursorChat from "./cursor/CursorChat";
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
@@ -28,8 +27,7 @@ type Props = {
 };
 
 const Live = ({ canvasRef, undo, redo }: Props) => {
-  const others = useOthers();
-  const [{ cursor }, updateMyPresence] = useMyPresence() as any;
+  const [{ cursor }, updateMyPresence] = useMyPresence();
 
   const broadcast = useBroadcastEvent();
 
@@ -74,7 +72,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
   }, 120);
 
   useEventListener((eventData) => {
-    const event = eventData.event as ReactionEvent;
+    const event = eventData.event;
     setReactions((reactions) =>
       reactions.concat([
         {
@@ -242,7 +240,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
           />
         )}
 
-        <LiveCursors others={others} />
+        <LiveCursors />
 
         <Comments />
       </ContextMenuTrigger>
