@@ -6,22 +6,24 @@
 
 @import "@liveblocks/react-ui/styles.css";
 
+@variant dark (&:where(.dark, .dark *));
+
 * {
   font-family: work sans, sans-serif;
 }
 
-/* global.css */
-@import "tailwindcss";
-
+body {
+  overflow: hidden;
+}
 @theme {
-  /* Color Definitions */
+  /* Colors */
   --color-primary-black: #14181f;
   --color-primary-green: #56ffa6;
   --color-primary-grey-100: #2b303b;
   --color-primary-grey-200: #202731;
-  --color-primary-grey-300: #c4d3ed;
+  --color-primary-grey-300: #c4d3ed; /* :contentReference[oaicite:1]{index=1} */
 
-  /* Container Settings */
+  /* Container */
   --container-padding: 2rem;
   --container-max-width: 1400px;
 
@@ -37,7 +39,6 @@
       height: var(--radix-accordion-content-height);
     }
   }
-
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
@@ -52,65 +53,36 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
-/* Container Styles */
-.container {
-  @apply mx-auto px-[var(--container-padding)] max-w-[var(--container-max-width)];
-}
-
-/* Dark mode theming */
-@dark {
-  :root {
-    /* Define dark mode variables if needed */
+/* 6. Component layer */
+@layer components {
+  .container {
+    @apply mx-auto px-[var(--container-padding)] max-w-[var(--container-max-width)];
   }
 }
 
+/* 7. Utilities layer */
 @layer utilities {
   .no-ring {
-    outline: none;
-    --tw-ring-offset-width: 1px;
-    --tw-ring-offset-color: #fff;
-    --tw-ring-color: rgba(0, 0, 0, 0);
-    --tw-ring-offset-shadow: 0 0 #0000;
-    --tw-ring-shadow: 0 0 #0000;
+    /* override outline with higher specificity */
+    outline: none !important; /* use plain CSS for !important overrides */
+    @apply ring-0 ring-offset-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0;
   }
 
   .input-ring {
-    height: 2rem;
-    border-radius: 0;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    --tw-ring-offset-width: 0px;
-
-    &:focus {
-      --tw-ring-offset-width: 0px;
-      --tw-ring-width: 1px;
-      --tw-ring-color: #56ffa6; /* This is your primary-green color */
-    }
+    @apply h-8 rounded-none border-none bg-transparent outline-none ring-offset-0;
+  }
+  .input-ring:focus {
+    @apply ring-1 ring-[var(--color-primary-green)] ring-offset-0;
   }
 
   .right-menu-content {
-    display: flex;
-    width: 20rem;
-    flex-direction: column;
-    gap: 0.25rem;
-    border: none;
-    background-color: #14181f; /* Your primary-black color */
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: white;
+    @apply flex w-80 flex-col gap-y-1 border-none bg-[var(--color-primary-black)] py-4 text-white;
   }
 
   .right-menu-item {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-
-    &:hover {
-      background-color: #202731; /* Your primary-grey-200 color */
-    }
+    @apply flex justify-between px-3 py-2;
+  }
+  .right-menu-item:hover {
+    @apply bg-[var(--color-primary-grey-200)];
   }
 }

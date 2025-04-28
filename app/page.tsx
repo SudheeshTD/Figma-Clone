@@ -283,7 +283,7 @@ export default function Page() {
           allShapes={canvasObjects ? Array.from(canvasObjects) : []}
         />
 
-        <Live canvasRef={canvasRef} />
+        <Live canvasRef={canvasRef} undo={undo} redo={redo} />
 
         <RightSidebar
           elementAttributes={elementAttributes}

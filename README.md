@@ -59,5 +59,6 @@ npx shadcn@latest add button
 
 figma-clone> npx shadcn-ui@latest add select label input
 
-
 npm i jspdf
+
+figma-clone> npx shadcn@latest add context-menu
