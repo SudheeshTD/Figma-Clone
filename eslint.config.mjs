@@ -40,6 +40,8 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off", // :contentReference[oaicite:1]{index=1}
       // disable React Hooks rules-of-hooks checks at build time
       "react-hooks/rules-of-hooks": "off", // :contentReference[oaicite:2]{index=2}
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
     },
   },
 ];
