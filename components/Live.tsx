@@ -204,12 +204,12 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger
+        className="relative flex h-full w-full flex-1 items-center justify-center"
         id="canvas"
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
-        className="relative flex h-full w-full flex-1 items-center justify-center"
       >
         <canvas ref={canvasRef} />
 

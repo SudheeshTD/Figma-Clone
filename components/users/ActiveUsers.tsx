@@ -1,8 +1,8 @@
 import { useOthers, useSelf } from "@liveblocks/react";
-import { Avatar } from "./Avatar";
-import styles from "./index.module.css";
+
 import { generateRandomName } from "@/lib/utils";
 import { useMemo } from "react";
+import { Avatar } from "./Avatar";
 
 const ActiveUsers = () => {
   const users = useOthers();
@@ -11,31 +11,28 @@ const ActiveUsers = () => {
 
   const memoizedUsers = useMemo(() => {
     return (
-      <div className="flex items-center justify-center gap-1 py-2">
-        <div className="flex pl-3">
-          {currentUser && (
-            //   <div className="relative ml-8 first:ml-0">
+      <div className="flex items-center justify-center gap-1 py-2 pt-7">
+        {currentUser && (
+          //   <div className="relative ml-8 first:ml-0">
+          <Avatar name="You" otherStyles="border-[3px] border-green" />
+          //   </div>
+        )}
+
+        {users.slice(0, 3).map(({ connectionId }) => {
+          return (
             <Avatar
-              name="You"
-              otherStyles="border-[3px] border-primary-green"
+              key={connectionId}
+              name={generateRandomName()}
+              otherStyles="-ml-3"
             />
-            //   </div>
-          )}
+          );
+        })}
 
-          {users.slice(0, 3).map(({ connectionId }) => {
-            return (
-              <Avatar
-                key={connectionId}
-                name={generateRandomName()}
-                otherStyles="-ml-3"
-              />
-            );
-          })}
-
-          {hasMoreUsers && (
-            <div className={styles.more}>+{users.length - 3}</div>
-          )}
-        </div>
+        {hasMoreUsers && (
+          <div className="z-10 -ml-3 flex h-9 w-9 items-center justify-center rounded-full bg-primary-black">
+            {users.length - 3}
+          </div>
+        )}
       </div>
     );
   }, [users.length]);

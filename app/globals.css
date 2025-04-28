@@ -22,6 +22,7 @@ body {
   --color-primary-grey-100: #2b303b;
   --color-primary-grey-200: #202731;
   --color-primary-grey-300: #c4d3ed; /* :contentReference[oaicite:1]{index=1} */
+  --border-primary-green: #56ffa6;
 
   /* Container */
   --container-padding: 2rem;
